@@ -16,7 +16,7 @@
     --blue: #80A4DD;        /* R128 G164 B221 */
     --blue-soft: #C4D5E7;   /* R196 G213 B231 */
     --sand: #D3C8C2;        /* R211 G200 B194 */
-    --lime: #D7F39C;        /* R215 G243 B156 */
+    --lime: #D7F39C;        /* R215 G243 B156 — in palette, oggi non usato nel sito */
     --white: #FFFFFF;
 
     /* Tinte derivate dal navy, per profondità, bordi e testi secondari */
@@ -69,7 +69,7 @@
   nav.links a{ color:var(--blue-soft); font-size:0.93rem; font-weight:600; transition:color .2s; }
   nav.links a:hover{ color:var(--white); }
   .nav-cta{
-    background:var(--lime); color:var(--navy); padding:10px 22px; border-radius:999px;
+    background:var(--blue-soft); color:var(--navy); padding:10px 22px; border-radius:999px;
     font-weight:700; font-size:0.88rem; white-space:nowrap;
     transition:transform .15s, background .2s;
   }
@@ -81,7 +81,7 @@
   .hero{
     background:
       radial-gradient(ellipse 720px 520px at 84% -10%, rgba(128,164,221,0.35), transparent 62%),
-      radial-gradient(ellipse 520px 420px at -8% 92%, rgba(215,243,156,0.14), transparent 62%),
+      radial-gradient(ellipse 520px 420px at -8% 92%, rgba(196,213,231,0.18), transparent 62%),
       var(--navy);
     color:var(--white);
     padding:180px 0 120px;
@@ -103,7 +103,7 @@
     animation: focusIn 1.35s cubic-bezier(.2,.7,.3,1) forwards;
     animation-delay:.15s;
   }
-  .hero h1 em{ color:var(--lime); font-style:normal; }
+  .hero h1 em{ color:var(--blue); font-style:normal; }
   @keyframes focusIn{
     0%{ filter:blur(9px); opacity:0; transform:translateY(8px); }
     100%{ filter:blur(0); opacity:1; transform:translateY(0); }
@@ -120,10 +120,10 @@
     transition:transform .15s, background .2s, border-color .2s, color .2s;
     border:1px solid transparent; cursor:pointer;
   }
-  .btn-primary{ background:var(--lime); color:var(--navy); }
+  .btn-primary{ background:var(--blue-soft); color:var(--navy); }
   .btn-primary:hover{ background:var(--white); transform:translateY(-2px); }
   .btn-ghost{ border-color:rgba(196,213,231,0.4); color:var(--white); }
-  .btn-ghost:hover{ border-color:var(--lime); color:var(--lime); }
+  .btn-ghost:hover{ border-color:var(--blue-soft); color:var(--blue-soft); }
   .btn-navy{ border-color:rgba(50,61,89,0.25); color:var(--navy); }
   .btn-navy:hover{ background:var(--navy); border-color:var(--navy); color:var(--white); }
 
@@ -171,7 +171,7 @@
   .point-list{ display:flex; flex-direction:column; gap:26px; }
   .point{ display:flex; gap:20px; align-items:flex-start; padding-bottom:26px; border-bottom:1px solid var(--navy-line); }
   .point:last-child{ border-bottom:none; padding-bottom:0; }
-  .point-num{ color:var(--lime); font-weight:800; font-size:0.95rem; padding-top:3px; }
+  .point-num{ color:var(--blue); font-weight:800; font-size:0.95rem; padding-top:3px; }
   .point h4{ font-size:1.02rem; margin-bottom:6px; }
   .point p{ color:var(--blue-soft); font-size:0.92rem; }
 
@@ -199,8 +199,8 @@
   .contatti p.lead{ color:var(--blue-soft); margin-top:14px; max-width:44ch; }
   .contact-info{ margin-top:28px; display:flex; flex-direction:column; gap:14px; }
   .contact-info a{ color:var(--white); font-weight:600; display:flex; gap:10px; align-items:center; transition:color .2s; }
-  .contact-info a:hover{ color:var(--lime); }
-  .contact-info svg{ width:18px; height:18px; stroke:var(--lime); flex-shrink:0; }
+  .contact-info a:hover{ color:var(--blue); }
+  .contact-info svg{ width:18px; height:18px; stroke:var(--blue); flex-shrink:0; }
   form{ display:flex; flex-direction:column; gap:14px; }
   .field label{ display:block; font-size:0.82rem; color:var(--blue-soft); margin-bottom:6px; font-weight:600; }
   .field input, .field textarea{
@@ -208,10 +208,10 @@
     padding:13px 16px; border-radius:14px; font-family:inherit; font-size:0.94rem;
   }
   .field input::placeholder, .field textarea::placeholder{ color:rgba(196,213,231,0.55); }
-  .field input:focus, .field textarea:focus{ outline:2px solid var(--lime); outline-offset:1px; border-color:transparent; }
+  .field input:focus, .field textarea:focus{ outline:2px solid var(--blue); outline-offset:1px; border-color:transparent; }
   .field textarea{ resize:vertical; min-height:110px; }
   form .btn-primary{ margin-top:6px; align-self:flex-start; border:none; }
-  .form-msg{ font-size:0.85rem; color:var(--lime); font-weight:600; }
+  .form-msg{ font-size:0.85rem; color:var(--blue-soft); font-weight:600; }
 
   /* ---------- FOOTER ---------- */
   footer{ background:var(--navy); color:var(--blue-soft); padding:44px 0; border-top:1px solid var(--navy-line); }
