@@ -65,6 +65,16 @@ python3 -m http.server 8000
 # poi apri http://localhost:8000
 ```
 
+## Dati dei negozi
+
+I numeri di telefono sono stati verificati su PagineGialle, PagineBianche, Virgilio Aziende e Yelp:
+Limido Comasco `031 938301`, Saronno `02 9602891`, Villa Guardia `031 563948`.
+
+Il pulsante di ogni scheda apre la ricerca di Google Maps per **nome del negozio + indirizzo**, così si
+arriva alla scheda dell'attività con recensioni, foto e orari, e non al semplice segnaposto dell'indirizzo.
+Se in futuro servisse puntare alla scheda in modo blindato, si può aggiungere `&query_place_id=<PLACE_ID>`
+all'URL, prendendo il Place ID dal profilo Google Business di ciascun negozio.
+
 ## Da sistemare
 
 - Gli orari di apertura dei negozi sono segnati "da confermare".
