@@ -10,6 +10,10 @@ Sito statico, senza build step e senza dipendenze da installare:
 - `index.html` — la pagina principale: hero, chi siamo, servizi, brands, recensioni, contatti.
 - `privacy.html` — informativa privacy e cookie.
 - `assets/style.css` — foglio di stile condiviso dalle due pagine, con le `@font-face`.
+- `assets/script.js` — anch'esso condiviso: il menu a panino su mobile e la comparsa dei blocchi
+  allo scorrimento. **Il menu mobile dipende dal JavaScript**: senza, il pannello non si apre. Non è
+  un problema pratico — la CTA resta nella barra e il footer ha le stesse voci — ma va tenuto
+  presente se un domani si tocca lo script.
 - `assets/fonts/` — Mulish in woff2, ospitato in locale, più il testo della licenza OFL.
 - `assets/magashop-mark.svg` — il pittogramma vettoriale estratto dalle brand guidelines. Nelle pagine
   è incorporato come `<symbol id="maga-mark">` e riusato con `<use>`: prende il colore da
@@ -113,7 +117,6 @@ segnaposto.
 
 | Cosa | Dove | Segnaposto |
 |---|---|---|
-| Storia del negozio | `index.html`, sezione "Chi siamo" | `<!-- TESTO DA CLIENTE -->` |
 | Loghi dei marchi trattati | `index.html`, sezione "Brands" + `assets/brands/` | `<!-- LOGHI DA CLIENTE -->` |
 | Recensioni Google da pubblicare | `index.html`, sezione "Recensioni" | `<!-- RECENSIONI DA CLIENTE -->` |
 | Ragione sociale, P.IVA, sede legale | `privacy.html` | `<!-- DATI DA CLIENTE -->` e il riquadro giallo |

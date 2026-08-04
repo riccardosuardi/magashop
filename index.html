@@ -35,6 +35,19 @@
       <a href="#contatti">Contatti</a>
     </nav>
     <a href="#contatti" class="nav-cta">Prenota una visita</a>
+    <button class="nav-toggle" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="menu-mobile" id="menu-mobile" hidden>
+    <nav aria-label="Menu principale">
+      <a href="#top">Home</a>
+      <a href="#chi-siamo">Chi siamo</a>
+      <a href="#servizi">Servizi</a>
+      <a href="#brands">Brands</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+    <a href="#contatti" class="btn btn-primary">Prenota una visita</a>
   </div>
 </header>
 
@@ -71,7 +84,7 @@
 
   <div class="trust-strip">
     <div class="wrap">
-      <span><strong>3</strong> negozi in Lombardia</span>
+      <span><strong>Dal 1973</strong> nell'occhialeria</span>
       <span><strong>Optometristi</strong> qualificati in ogni sede</span>
       <span><strong>Strumentazione</strong> professionale e aggiornata</span>
       <span><strong>Limido Comasco</strong> · <strong>Saronno</strong> · <strong>Villa Guardia</strong></span>
@@ -83,27 +96,25 @@
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">Chi siamo</span>
-        <h2>Competenza tecnica, accoglienza da negozio di fiducia</h2>
-        <p>Chi entra da noi per un controllo più tecnico trova la stessa attenzione di chi cerca solo un occhiale da sole. È la differenza che vogliamo si veda.</p>
+        <h2>Dal 1973, una storia di famiglia</h2>
+        <p>Dal sottoscala di Luciano ai tre negozi di oggi, passando per due generazioni.</p>
       </div>
 
-      <!-- TESTO DA CLIENTE: storia del negozio. I due paragrafi qui sotto sono
-           segnaposto, vanno sostituiti col testo che manderà il cliente. -->
       <div class="storia reveal">
         <div>
-          <p>[Storia del negozio — primo paragrafo. Da dove nasce MagaShop, chi l'ha fondata e in che anno, come è cresciuta fino alle tre sedi di oggi.]</p>
-          <p>[Secondo paragrafo. Il passaggio generazionale o le persone che ci lavorano, che cosa è rimasto uguale nel tempo.]</p>
+          <p>La storia di MagaShop inizia nel 1973 dalla passione di Luciano Gandini per l'occhialeria. Dal suo sottoscala nacque l'idea e la produzione dei suoi primi occhiali da vista e da sole e, ben presto, innovazione e design portarono il suo marchio ad essere esportato e apprezzato in tutto il mondo.</p>
         </div>
         <div>
-          <p>[Terzo paragrafo. Il modo di lavorare: come si accoglie una persona che entra, quanto tempo si dedica a un controllo, il rapporto che si costruisce negli anni.]</p>
-          <p>[Quarto paragrafo. Uno sguardo al presente: la formazione continua, la strumentazione, i marchi scelti.]</p>
+          <p>Dal fortunato incontro con Rosy, ottico e sua futura moglie, negli anni '90 nacque il primo punto vendita MagaShop a Limido Comasco, seguito da quelli di Saronno e Villa Guardia.</p>
+          <p>Oggi, dopo tanti anni, la figlia Francesca continua a dedicarsi con amore, professionalità e dedizione all'attività di famiglia.</p>
         </div>
       </div>
+      <p class="storia-chiusura reveal">Nelle nostre sedi troverai un team di ottici e optometristi preparato e pronto a consigliarti le soluzioni più appropriate per la tua vista.</p>
 
       <div class="point-list reveal">
         <div class="point">
           <span class="point-num">01</span>
-          <div><h4>Optometristi qualificati</h4><p>In ogni sede lavora personale formato per misurare la vista in modo accurato, non solo per vendere.</p></div>
+          <div><h4>Prima di venderli, li costruivamo</h4><p>Da un laboratorio di occhiali si impara a guardare una montatura da dentro. Quell'occhio ce lo portiamo dietro da allora.</p></div>
         </div>
         <div class="point">
           <span class="point-num">02</span>
@@ -418,13 +429,7 @@
 }
 </script>
 
-<script>
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
-</script>
+<script src="assets/script.js" defer></script>
 
 </body>
 </html>

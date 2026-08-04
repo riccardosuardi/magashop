@@ -90,8 +90,52 @@ nav.links a:hover{ color:var(--white); }
   transition:transform .15s, background .2s;
 }
 .nav-cta:hover{ background:var(--white); transform:translateY(-1px); }
-@media (max-width:940px){ nav.links{ display:none; } }
-@media (max-width:420px){ .nav-cta{ padding:9px 16px; font-size:0.82rem; } }
+
+/* ---------- MENU A PANINO (sotto i 940px) ---------- */
+.nav-toggle{
+  display:none; width:44px; height:44px; flex-shrink:0;
+  background:none; border:1px solid var(--navy-line); border-radius:12px;
+  align-items:center; justify-content:center; cursor:pointer;
+}
+.nav-toggle-bars{ position:relative; }
+.nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after{
+  display:block; width:20px; height:2px; border-radius:2px; background:var(--white);
+  transition:transform .2s ease, background .15s ease;
+}
+.nav-toggle-bars::before, .nav-toggle-bars::after{ content:''; position:absolute; }
+.nav-toggle-bars::before{ transform:translateY(-6px); }
+.nav-toggle-bars::after{ transform:translateY(6px); }
+/* Aperto: la barra centrale sparisce e le altre due si incrociano. */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars{ background:transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars::before{ transform:rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars::after{ transform:rotate(-45deg); }
+
+.menu-mobile{
+  /* Fondo pieno, non ereditato dalla barra: sotto scorre la pagina e in
+     trasparenza il testo dell'hero si leggerebbe attraverso le voci. */
+  background:var(--navy);
+  border-top:1px solid var(--navy-line);
+  padding:12px 28px 28px;
+  max-height:calc(100vh - 72px); overflow-y:auto;
+}
+.menu-mobile nav{ display:flex; flex-direction:column; }
+.menu-mobile nav a{
+  color:var(--blue-soft); font-size:1.05rem; font-weight:600;
+  padding:14px 0; border-bottom:1px solid var(--navy-line);
+}
+.menu-mobile nav a:hover{ color:var(--white); }
+.menu-mobile .btn{ margin-top:22px; width:100%; }
+
+@media (max-width:940px){
+  nav.links{ display:none; }
+  .nav-toggle{ display:flex; }
+}
+/* Sotto i 520px logo, CTA e panino non ci starebbero: la CTA resta solo nel pannello. */
+@media (max-width:520px){ .nav-cta{ display:none; } }
+@media (min-width:941px){ .menu-mobile{ display:none; } }
+@media (prefers-reduced-motion: reduce){
+  .nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after{ transition:none; }
+}
 
 /* ---------- BOTTONI ---------- */
 .btn{
@@ -169,10 +213,16 @@ nav.links a:hover{ color:var(--white); }
 .chi-siamo{ background:var(--navy); color:var(--white); }
 .chi-siamo .section-head h2{ color:var(--white); }
 .chi-siamo .section-head p{ color:var(--blue-soft); }
-.storia{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-bottom:68px; }
-@media (max-width:900px){ .storia{ grid-template-columns:1fr; gap:28px; margin-bottom:48px; } }
+.storia{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-bottom:36px; }
+@media (max-width:900px){ .storia{ grid-template-columns:1fr; gap:16px; margin-bottom:28px; } }
 .storia p{ color:var(--blue-soft); }
 .storia p + p{ margin-top:16px; }
+/* Chiusura della storia: sta al presente, quindi va staccata dal racconto. */
+.storia-chiusura{
+  color:var(--white); font-size:1.08rem; max-width:62ch;
+  padding-left:22px; border-left:3px solid var(--blue); margin-bottom:68px;
+}
+@media (max-width:900px){ .storia-chiusura{ margin-bottom:48px; font-size:1rem; padding-left:18px; } }
 .point-list{ display:grid; grid-template-columns:1fr 1fr; gap:26px 60px; }
 @media (max-width:900px){ .point-list{ grid-template-columns:1fr; } }
 .point{ display:flex; gap:20px; align-items:flex-start; padding-bottom:26px; border-bottom:1px solid var(--navy-line); }
