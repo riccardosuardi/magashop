@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://riccardosuardi.github.io/magashop/sitemap.xml

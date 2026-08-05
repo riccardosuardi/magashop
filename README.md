@@ -7,13 +7,17 @@ lenti a contatto. Tre negozi in Lombardia: Limido Comasco, Saronno, Villa Guardi
 
 Sito statico, senza build step e senza dipendenze da installare:
 
-- `index.html` — la pagina principale: hero, chi siamo, servizi, brands, recensioni, contatti.
+- `index.html` — la pagina principale: hero, chi siamo, servizi, brand, recensioni, contatti.
 - `privacy.html` — informativa privacy e cookie.
 - `assets/style.css` — foglio di stile condiviso dalle due pagine, con le `@font-face`.
-- `assets/script.js` — anch'esso condiviso: il menu a panino su mobile e la comparsa dei blocchi
-  allo scorrimento. **Il menu mobile dipende dal JavaScript**: senza, il pannello non si apre. Non è
-  un problema pratico — la CTA resta nella barra e il footer ha le stesse voci — ma va tenuto
-  presente se un domani si tocca lo script.
+- `assets/script.js` — anch'esso condiviso: menu a panino, comparse allo scorrimento, numeri che
+  salgono, parallasse del pattern e carosello delle recensioni. **Menu mobile e carosello dipendono
+  dal JavaScript**: senza, il pannello non si apre e la sezione recensioni si rimuove da sola invece
+  di restare vuota. Il resto della pagina funziona comunque.
+- `assets/recensioni.json` — le recensioni mostrate nel carosello (vedi sotto).
+- `assets/og-image.png` — anteprima per la condivisione su social e messaggistica.
+- `assets/loghi/` — marchi istituzionali del footer (da popolare, vedi il README lì dentro).
+- `sitemap.xml` e `robots.txt` — indicizzazione.
 - `assets/fonts/` — Mulish in woff2, ospitato in locale, più il testo della licenza OFL.
 - `assets/magashop-mark.svg` — il pittogramma vettoriale estratto dalle brand guidelines. Nelle pagine
   è incorporato come `<symbol id="maga-mark">` e riusato con `<use>`: prende il colore da
@@ -33,9 +37,14 @@ Il sito segue le **Brand Guidelines Ottica MagaShop**.
 |---|---|---|---|
 | Navy | `#323D59` | 50 61 89 | header, hero, "chi siamo", footer, testo sui fondi chiari |
 | Blu | `#80A4DD` | 128 164 221 | eyebrow, icone, numerazione, accenti di testo |
-| Blu chiaro | `#C4D5E7` | 196 213 231 | pulsanti pieni, testo sui fondi navy, bordi, fondo sezione brands |
+| Blu chiaro | `#C4D5E7` | 196 213 231 | testo sui fondi navy, bordi, fondo sezione brand, etichette sede |
 | Sabbia | `#D3C8C2` | 211 200 194 | fascia dei dati sotto l'hero |
-| Lime | `#D7F39C` | 215 243 156 | in palette, oggi non usato |
+| Lime | `#D7F39C` | 215 243 156 | pulsanti pieni, numerazione, stelle, icone dei servizi |
+
+Sul lime va detta una cosa, perché è già stata sbagliata una volta: **non è un colore a basso
+contrasto**. Testo navy su lime dà 8,8:1, il rapporto più alto della palette. Il colore da maneggiare
+con cura è l'azzurro pieno `#80A4DD`, che con il navy si ferma a 4,25:1 — sotto la soglia di 4,5:1
+per il testo normale, quindi va bene per titoli grandi e icone, non per testo piccolo su pulsante.
 
 `--navy-deep`, `--navy-line` e `--ink-soft` sono tinte derivate dal navy per profondità, bordi e testi
 secondari: servono all'interfaccia, non sono colori di brand aggiuntivi.
@@ -100,26 +109,83 @@ Place ID dal profilo Google Business di ciascun negozio.
 Per orari che cambiano una volta l'anno, tenerli scritti nel sito è la scelta ragionevole. Vanno però
 aggiornati anche sul profilo Google, che è dove la maggior parte delle persone li legge.
 
+## Recensioni
+
+Il carosello legge **`assets/recensioni.json`**: un array di oggetti con `sede`, `autore`, `stelle`
+e `testo`. Mostra una recensione per punto vendita, ruota da sola ogni 7 secondi, si ferma al
+passaggio del mouse e quando un controllo riceve il focus, e con `prefers-reduced-motion` non parte
+affatto. Per cambiare le recensioni **si tocca solo quel file**: nell'HTML non c'è testo da
+modificare. Se il file manca o è vuoto, la sezione si rimuove da sola.
+
+### Perché non si aggiornano da sole
+
+La richiesta era "selezionare automaticamente le migliori recensioni a 5 stelle". Con la **Places
+API non si può fare**: restituisce al massimo 5 recensioni, solo quelle che Google considera più
+pertinenti, senza filtro né ordinamento per stelle.
+
+L'unica via davvero automatica è la **Google Business Profile API**, che legge tutte le recensioni
+dall'account del cliente e permette di filtrarle. È gratuita, ma l'accesso va richiesto a Google e
+l'approvazione non è né scontata né rapida. Se un giorno arriva, basta una GitHub Action che
+riscriva `recensioni.json`: il sito non cambia di una riga, ed è per questo che il carosello nasce
+già leggendo un file invece di avere le recensioni scritte dentro l'HTML.
+
+I widget di terze parti (Elfsight, Trustindex) lo farebbero subito, ma caricano script esterni:
+costerebbero l'assenza di banner cookie, e i piani gratuiti hanno un tetto di visualizzazioni.
+
+## Social
+
+Le icone in fondo alla pagina portano a Instagram e Facebook. Sono **link normali**, non contenuti
+incorporati: nessuno script, nessun cookie, nessun impatto sulla privacy finché si resta così.
+
+### Perché non c'è il feed di Instagram
+
+La Basic Display API è spenta dal 4 dicembre 2024. Oggi servono un account Instagram Professional,
+un'app Meta e un token che scade ogni 60 giorni. Su GitHub Pages non c'è un server dove tenerlo,
+quindi restano due strade: un widget di terze parti — che fa **decadere l'assenza di banner cookie** —
+oppure una GitHub Action che scarica ogni giorno post e immagini dentro il repo, così i contenuti
+restano serviti da noi. La seconda è l'unica che non costa il banner, ma è un pezzo di
+infrastruttura da mantenere: va affrontata come lavoro a sé.
+
+## Dati societari nel footer
+
+L'art. 2250 del codice civile impone alle società di capitali di indicare **anche sul sito** sede,
+ufficio del Registro Imprese e numero di iscrizione, REA, capitale sociale effettivamente versato,
+eventuale socio unico e stato di liquidazione. Vanno aggiunti partita IVA, codice fiscale e PEC.
+
+Il blocco è in fondo a `index.html` e `privacy.html`, con i campi fra parentesi quadre. **Vanno
+tenuti allineati fra le due pagine.** Nessuno di questi dati è stato inventato: finché non arrivano
+dal cliente restano segnaposto.
+
 ## Privacy e cookie
 
 Il sito **non usa cookie e non carica nulla da server di terze parti**: niente analytics, niente
 widget, niente iframe, font in locale. Per questo non c'è banner di consenso, e `privacy.html` lo
 dichiara esplicitamente.
 
-**Se in futuro si aggiunge Google Analytics, un widget di recensioni, una mappa incorporata o un
-modulo di contatto con script esterno, il banner cookie con blocco preventivo diventa obbligatorio**
-e l'informativa va riscritta di conseguenza.
+Il banner serve solo se ci sono cookie non tecnici o strumenti di tracciamento (Linee guida del
+Garante del 10 giugno 2021). Qui non ce ne sono, quindi non serve.
+
+**Se in futuro si aggiunge Google Analytics, un widget di recensioni, il feed Instagram, una mappa
+incorporata o un modulo con script esterno, il banner con blocco preventivo diventa obbligatorio**:
+"Accetta" e "Rifiuta" allo stesso livello, niente consenso per scroll, niente cookie wall. E
+l'informativa va riscritta di conseguenza.
+
+L'informativa dichiara anche il **trasferimento di dati verso gli Stati Uniti** dovuto all'hosting su
+GitHub Pages, sulla base della decisione di adeguatezza UE-USA (Data Privacy Framework). Se il sito
+cambia hosting, quella parte va rivista.
 
 ## Contenuti ancora da inserire
 
 Sono già predisposti nel codice, marcati con commenti HTML in maiuscolo: basta sostituire i
 segnaposto.
 
-| Cosa | Dove | Segnaposto |
-|---|---|---|
-| Loghi dei marchi trattati | `index.html`, sezione "Brands" + `assets/brands/` | `<!-- LOGHI DA CLIENTE -->` |
-| Recensioni Google da pubblicare | `index.html`, sezione "Recensioni" | `<!-- RECENSIONI DA CLIENTE -->` |
-| Ragione sociale, P.IVA, sede legale | `privacy.html` | `<!-- DATI DA CLIENTE -->` e il riquadro giallo |
+| Cosa | Dove |
+|---|---|
+| Loghi dei marchi trattati | `index.html` sezione Brand + `assets/brands/` |
+| Recensioni da pubblicare | `assets/recensioni.json` |
+| Dati societari completi | footer di `index.html` e `privacy.html`, più `privacy.html` |
+| Logo attività storiche e logo Confcommercio | `assets/loghi/`, blocco commentato nel footer |
+| Conferma degli indirizzi social | footer e `sameAs` nel JSON-LD |
 
 Il riquadro giallo in cima a `privacy.html` va tolto quando i dati societari sono stati inseriti:
 finché è lì, segnala che la pagina non è definitiva.

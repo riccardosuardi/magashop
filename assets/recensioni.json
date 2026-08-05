@@ -1,0 +1,20 @@
+[
+  {
+    "sede": "Limido Comasco",
+    "autore": "[Nome dell'autore]",
+    "stelle": 5,
+    "testo": "[Testo della recensione, copiato dalla scheda Google di Limido Comasco.]"
+  },
+  {
+    "sede": "Saronno",
+    "autore": "[Nome dell'autore]",
+    "stelle": 5,
+    "testo": "[Testo della recensione, copiato dalla scheda Google di Saronno.]"
+  },
+  {
+    "sede": "Villa Guardia",
+    "autore": "[Nome dell'autore]",
+    "stelle": 5,
+    "testo": "[Testo della recensione, copiato dalla scheda Google di Villa Guardia.]"
+  }
+]
