@@ -32,6 +32,29 @@ e la sezione resta pubblicabile anche con zero loghi.
 - **Solo marchi autorizzati**: vanno mostrati soltanto i brand di cui MagaShop è rivenditore
   autorizzato.
 
+## Lo script che ne scarica una parte
+
+Nel repo c'è **`scripts/scarica-loghi.py`**: cerca ogni marchio su Wikipedia, ne prende il logo,
+lo salva qui dentro e aggiunge la chiave `file` in `assets/brands.json`. Non ha dipendenze, serve
+solo Python 3.
+
+```bash
+python3 scripts/scarica-loghi.py --prova    # mostra cosa farebbe, senza scrivere
+python3 scripts/scarica-loghi.py            # scarica davvero
+```
+
+Va lanciato **da un computer con rete aperta**: l'ambiente in cui è stato costruito il sito non
+raggiunge Wikipedia, ed è il motivo per cui i loghi non erano già qui.
+
+Copre i marchi che hanno una voce su Wikipedia — una ventina dei 36, cioè i grandi nomi della moda.
+Sugli indipendenti italiani (Epos, NIK03, Opposit, Eyepetizer, Le Parc…) non troverà nulla: lo dice
+lui stesso a fine esecuzione, con l'elenco di quelli da chiedere ai fornitori.
+
+Due cose da fare dopo averlo lanciato: **guardare i file uno per uno** — Wikipedia a volte mette
+come immagine principale una fotografia invece del logo, e lo script segnala i casi sospetti ma non
+può deciderli — e **sostituire con i file ufficiali** quelli che i fornitori mandano, che hanno
+sempre la precedenza.
+
 ## Dove procurarli
 
 **Non vanno ricostruiti a mano né scaricati dai siti aggregatori** (Seeklogo, Worldvectorlogo e
