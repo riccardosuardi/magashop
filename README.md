@@ -15,6 +15,7 @@ Sito statico, senza build step e senza dipendenze da installare:
   dal JavaScript**: senza, il pannello non si apre e la sezione recensioni si rimuove da sola invece
   di restare vuota. Il resto della pagina funziona comunque.
 - `assets/recensioni.json` — le recensioni mostrate nel carosello (vedi sotto).
+- `assets/brands.json` — i 36 marchi trattati, che alimentano il nastro a scorrimento.
 - `assets/og-image.png` — anteprima per la condivisione su social e messaggistica.
 - `assets/loghi/` — marchi istituzionali del footer (da popolare, vedi il README lì dentro).
 - `sitemap.xml` e `robots.txt` — indicizzazione.
@@ -27,7 +28,7 @@ Sito statico, senza build step e senza dipendenze da installare:
 - `assets/brands/` — loghi dei marchi trattati (da popolare, vedi sotto).
 - `.nojekyll` — disattiva la pipeline Jekyll di GitHub Pages: i file vengono serviti così come sono.
 
-## Brand
+## Identità del marchio
 
 Il sito segue le **Brand Guidelines Ottica MagaShop**.
 
@@ -70,8 +71,11 @@ testo va tenuto in `assets/fonts/OFL.txt`.
 - **Il marchio non viene mai ruotato**, nemmeno nel pattern dell'hero: le istanze sono dritte e
   sfalsate a mattoncino. Il `patternTransform="rotate(...)"` che c'era prima è stato tolto proprio
   per questo — non va reintrodotto.
-- I **loghi dei marchi trattati** vanno mostrati nei loro colori originali: niente filtri, niente
-  monocromia, altrimenti si violano le guidelines dei rispettivi brand.
+- I **loghi dei marchi trattati** nel nastro sono resi in navy monocromatico. È una deroga
+  consapevole alla regola dei colori originali: quasi tutti quei marchi hanno un logotipo nero,
+  quindi in navy restano quasi fedeli, e la monocromia è ciò che tiene insieme 36 segni diversi.
+  Per i marchi il cui colore è identitario — Missoni su tutti — va deciso caso per caso quando
+  arriveranno i file. Vedi `assets/brands/README.md`.
 - Nessun colore fuori palette.
 
 ## Dati dei negozi
@@ -108,6 +112,21 @@ Place ID dal profilo Google Business di ciascun negozio.
 
 Per orari che cambiano una volta l'anno, tenerli scritti nel sito è la scelta ragionevole. Vanno però
 aggiornati anche sul profilo Google, che è dove la maggior parte delle persone li legge.
+
+## I marchi trattati
+
+I 36 marchi stanno in **`assets/brands.json`**, in ordine alfabetico. Il nastro li divide in due
+righe — prima metà sopra, seconda sotto, così l'ordine A–Z si legge riga per riga — e le fa scorrere
+a velocità diverse. Si ferma al passaggio del mouse e quando un elemento riceve il focus; con
+`prefers-reduced-motion` non parte e diventa una griglia statica con tutti i marchi visibili.
+
+Sotto al nastro c'è **l'elenco completo come testo**, letto una volta sola: serve a chi usa uno
+screen reader, che da un nastro in movimento non ricava nulla, e a Google, che così associa il sito
+alle ricerche del tipo "ottica che vende Ray-Ban a Saronno". La copia duplicata che rende continuo
+lo scorrimento è nascosta agli assistivi.
+
+Per aggiungere o togliere un marchio si tocca **solo il JSON**. Per i loghi e le grafie da
+confermare vedi `assets/brands/README.md`.
 
 ## Recensioni
 
@@ -181,7 +200,7 @@ segnaposto.
 
 | Cosa | Dove |
 |---|---|
-| Loghi dei marchi trattati | `index.html` sezione Brand + `assets/brands/` |
+| Loghi dei marchi trattati | `assets/brands.json` (chiave `file`) + `assets/brands/` |
 | Recensioni da pubblicare | `assets/recensioni.json` |
 | Dati societari completi | footer di `index.html` e `privacy.html`, più `privacy.html` |
 | Logo attività storiche e logo Confcommercio | `assets/loghi/`, blocco commentato nel footer |

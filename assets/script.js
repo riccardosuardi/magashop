@@ -134,6 +134,60 @@ const MOTO_RIDOTTO = window.matchMedia('(prefers-reduced-motion: reduce)');
   );
 })();
 
+/* ---------- Nastro dei brand ----------
+   I marchi stanno in assets/brands.json. Se la voce ha una chiave "file" viene mostrato
+   il logo da assets/brands/, altrimenti il nome composto: così la sezione funziona già
+   oggi che i loghi ufficiali non ci sono, e domani ogni logo prende il posto della
+   propria scritta senza toccare nient'altro. */
+(function () {
+  const root = document.querySelector('[data-nastro]');
+  const elenco = document.querySelector('[data-elenco]');
+  if (!root) return;
+
+  const righe = [...root.querySelectorAll('[data-riga]')];
+
+  const esc = (t) =>
+    String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  const voce = (b) =>
+    b.file
+      ? `<div class="brand-card"><img src="assets/brands/${esc(b.file)}" alt="${esc(b.nome)}" loading="lazy"></div>`
+      : `<div class="brand-card">${esc(b.nome)}</div>`;
+
+  fetch('assets/brands.json')
+    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then((brand) => {
+      const validi = brand.filter((b) => b && b.nome);
+      if (!validi.length) {
+        root.remove();
+        if (elenco) elenco.remove();
+        return;
+      }
+
+      // Prima metà alfabetica sopra, seconda sotto: l'ordine A-Z si legge riga per riga.
+      const meta = Math.ceil(validi.length / 2);
+      const gruppi = [validi.slice(0, meta), validi.slice(meta)];
+
+      righe.forEach((riga, i) => {
+        const html = gruppi[i].map(voce).join('');
+        // La sequenza va ripetuta perché il ciclo si richiuda senza salto, ma la copia
+        // non deve essere letta due volte da chi usa uno screen reader.
+        const copia = MOTO_RIDOTTO.matches
+          ? ''
+          : `<span class="nastro-copia" aria-hidden="true" style="display:contents">${html}</span>`;
+        riga.innerHTML = html + copia;
+      });
+
+      // L'elenco completo, leggibile una volta sola: per gli assistivi e per i motori.
+      if (elenco) elenco.textContent = validi.map((b) => b.nome).join(' · ');
+    })
+    .catch(() => {
+      // Meglio nessun nastro che un nastro vuoto.
+      root.remove();
+      if (elenco) elenco.remove();
+    });
+})();
+
 /* ---------- Carosello recensioni ----------
    Le recensioni stanno in assets/recensioni.json: per cambiarle si tocca solo quel
    file. Se un giorno l'accesso alla Google Business Profile API viene approvato,

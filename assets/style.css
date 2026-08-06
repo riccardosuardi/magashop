@@ -258,20 +258,56 @@ nav.links a:hover{ color:var(--white); }
 .service-card h3{ font-size:1.08rem; margin-bottom:8px; }
 .service-card p{ font-size:0.92rem; color:var(--ink-soft); }
 
-/* ---------- BRANDS ---------- */
+/* ---------- BRAND (nastro a scorrimento) ---------- */
 .brands{ background:var(--blue-soft); }
-.brand-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:18px; }
-@media (max-width:980px){ .brand-grid{ grid-template-columns:repeat(3,1fr); } }
-@media (max-width:560px){ .brand-grid{ grid-template-columns:repeat(2,1fr); } }
-/* I loghi dei marchi vanno mostrati nei loro colori originali: niente filtri né viraggi. */
-.brand-card{
-  background:var(--white); border-radius:var(--radius);
-  min-height:110px; padding:22px;
-  display:flex; align-items:center; justify-content:center;
+.nastro{
+  /* Il taglio sta qui, non sul body: il nastro non deve mai far scorrere la pagina.
+     Le sfumature ai lati mascherano entrata e uscita delle voci. */
+  overflow:hidden;
+  display:flex; flex-direction:column; gap:18px;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.brand-card img{ max-height:46px; width:auto; object-fit:contain; }
-.brand-placeholder{
-  color:var(--ink-soft); font-size:0.9rem; font-weight:700; letter-spacing:0.04em; text-align:center;
+.nastro-riga{ display:flex; width:max-content; gap:18px; will-change:transform; }
+/* Due velocità diverse: le righe non scorrono all'unisono, il movimento respira. */
+.nastro-riga:nth-child(1){ animation:scorri 64s linear infinite; }
+.nastro-riga:nth-child(2){ animation:scorri 82s linear infinite; }
+/* La sequenza è ripetuta due volte: a metà corsa il fotogramma coincide con l'inizio,
+   quindi il ciclo si richiude senza stacco. */
+@keyframes scorri{ to{ transform:translateX(-50%); } }
+.nastro:hover .nastro-riga,
+.nastro:focus-within .nastro-riga{ animation-play-state:paused; }
+
+.brand-card{
+  background:var(--white); border-radius:999px;
+  height:74px; padding:0 34px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--navy); font-weight:700; font-size:1.02rem; white-space:nowrap;
+}
+/* Loghi e nomi convivono sulla stessa riga: stessa altezza, nessun salto. */
+.brand-card img{ max-height:30px; width:auto; object-fit:contain; }
+
+/* 0.85 e non meno: sotto quella soglia il navy sul fondo azzurro scende sotto 4,5:1. */
+.brand-elenco{
+  margin-top:30px; color:var(--navy); opacity:0.85;
+  font-size:0.86rem; line-height:1.9;
+}
+
+@media (max-width:720px){
+  .brand-card{ height:62px; padding:0 24px; font-size:0.94rem; }
+  .nastro-riga:nth-child(1){ animation-duration:48s; }
+  .nastro-riga:nth-child(2){ animation-duration:60s; }
+}
+
+/* Niente movimento: le righe diventano una griglia che va a capo, con tutti i marchi
+   visibili. La copia duplicata viene nascosta dallo script. */
+@media (prefers-reduced-motion: reduce){
+  .nastro{ -webkit-mask-image:none; mask-image:none; }
+  /* Va ripetuto :nth-child, altrimenti le regole delle due righe restano più
+     specifiche di questa e l'animazione continua a girare. */
+  .nastro-riga:nth-child(1),
+  .nastro-riga:nth-child(2){ animation:none; }
+  .nastro-riga{ width:auto; flex-wrap:wrap; justify-content:center; }
 }
 
 /* ---------- RECENSIONI (carosello) ---------- */

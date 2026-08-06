@@ -186,22 +186,17 @@
         <p>Montature e lenti scelte una per una, di marchi di cui siamo rivenditori autorizzati.</p>
       </div>
 
-      <!-- LOGHI DA CLIENTE: sostituire ogni .brand-card col logo del marchio, così:
-           <div class="brand-card"><img src="assets/brands/nome-marchio.svg" alt="Nome marchio"></div>
-           File in assets/brands/, meglio SVG; se PNG, con trasparenza e a doppia risoluzione.
-           I loghi vanno lasciati nei colori originali: niente filtri, niente monocromia. -->
-      <div class="brand-grid">
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 1</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 2</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 3</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 4</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 5</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 6</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 7</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 8</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 9</span></div>
-        <div class="brand-card reveal stagger"><span class="brand-placeholder">Logo 10</span></div>
+      <!-- Il nastro lo costruisce assets/script.js leggendo assets/brands.json.
+           Per aggiungere o togliere un marchio si tocca solo quel file. Quando arriva
+           il logo ufficiale basta aggiungere la chiave "file": l'immagine prende il
+           posto della scritta, stessa riga e stessa altezza. -->
+      <div class="nastro" data-nastro>
+        <div class="nastro-riga" data-riga></div>
+        <div class="nastro-riga" data-riga></div>
       </div>
+      <!-- Elenco leggibile una volta sola: serve a chi usa uno screen reader e ai
+           motori di ricerca, che da un nastro in movimento non ricavano nulla. -->
+      <p class="brand-elenco" data-elenco></p>
     </div>
   </section>
 
