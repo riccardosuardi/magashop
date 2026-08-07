@@ -202,8 +202,12 @@ def main():
             if nota:
                 avvisi.append(f"{nome}: {nota}")
         else:
-            marchi_senza = marchio.pop("file", None)   # se era rotto, meglio toglierlo
-            del marchi_senza
+            # Se il file c'è davvero su disco — per esempio messo a mano — la chiave
+            # resta: il download fallito non deve cancellare il lavoro di qualcun altro.
+            riferimento = marchio.get("file")
+            if riferimento and not (DESTINAZIONE / riferimento).exists():
+                marchio.pop("file")
+                print(f"     tolto il riferimento a {riferimento}: il file non c'è")
             mancanti.append(nome)
             print(f"     no: {nota}")
 
