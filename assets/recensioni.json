@@ -1,20 +1,20 @@
 [
   {
     "sede": "Limido Comasco",
-    "autore": "[Nome dell'autore]",
+    "autore": "Domenico",
     "stelle": 5,
-    "testo": "[Testo della recensione, copiato dalla scheda Google di Limido Comasco.]"
+    "testo": "Ho fatto occhiali importanti nel punto vendita di Limido Comasco, personale gentile e preparato. Dopo la visita e la decisione del tipo di montatura e lenti (progressive), tempi di esecuzione e consegna veramente brevi (4 giorni). Gli occhiali vanno bene e sono veramente soddisfatto. Negozio di ottica consigliato."
   },
   {
     "sede": "Saronno",
-    "autore": "[Nome dell'autore]",
+    "autore": "Arianna",
     "stelle": 5,
-    "testo": "[Testo della recensione, copiato dalla scheda Google di Saronno.]"
+    "testo": "Sono cliente del negozio da diversi anni. Penso che il rapporto qualità/prezzo sia ottimo. Le consegne sono piuttosto rapide e le comunicazioni tempestive. Last but not least: il personale è molto attento a cogliere e soddisfare le esigenze del cliente, competente e abile nell'orientarlo in un campo non suo; si percepisce molta cura e passione."
   },
   {
     "sede": "Villa Guardia",
-    "autore": "[Nome dell'autore]",
+    "autore": "Maurizio",
     "stelle": 5,
-    "testo": "[Testo della recensione, copiato dalla scheda Google di Villa Guardia.]"
+    "testo": "Sono loro cliente da anni, poi per uno specchietto commerciale mi sono spostato… Sono ritornato, ho trovato come avevo lasciato: cortesia, professionalità e aggiornamento su nuovi prodotti. Insomma, bisogna a volte provare altre strade per rendersi conto che la vecchia è sempre la migliore. Consiglio vivamente!"
   }
 ]
