@@ -26,7 +26,9 @@ Sito statico, senza build step e senza dipendenze da installare:
 - `assets/magashop-wordmark.png` — il logotipo "OTTICA MAGASHOP" in bianco su fondo trasparente.
 - `assets/favicon.svg` — il pittogramma bianco su quadrato navy.
 - `assets/brands/` — loghi dei marchi trattati (da popolare, vedi sotto).
-- `.nojekyll` — disattiva la pipeline Jekyll di GitHub Pages: i file vengono serviti così come sono.
+- `scripts/scarica-loghi.py` — scarica i loghi dei marchi da Wikipedia (vedi `assets/brands/README.md`).
+- `.nojekyll` — residuo del periodo su GitHub Pages, dove disattivava Jekyll. Su Vercel è inerte:
+  lo teniamo solo perché tornare indietro non costi nulla.
 
 ## Identità del marchio
 
@@ -159,7 +161,7 @@ incorporati: nessuno script, nessun cookie, nessun impatto sulla privacy finché
 ### Perché non c'è il feed di Instagram
 
 La Basic Display API è spenta dal 4 dicembre 2024. Oggi servono un account Instagram Professional,
-un'app Meta e un token che scade ogni 60 giorni. Su GitHub Pages non c'è un server dove tenerlo,
+un'app Meta e un token che scade ogni 60 giorni. Il sito è statico e non ha un server dove tenerlo,
 quindi restano due strade: un widget di terze parti — che fa **decadere l'assenza di banner cookie** —
 oppure una GitHub Action che scarica ogni giorno post e immagini dentro il repo, così i contenuti
 restano serviti da noi. La seconda è l'unica che non costa il banner, ma è un pezzo di
@@ -190,8 +192,8 @@ incorporata o un modulo con script esterno, il banner con blocco preventivo dive
 l'informativa va riscritta di conseguenza.
 
 L'informativa dichiara anche il **trasferimento di dati verso gli Stati Uniti** dovuto all'hosting su
-GitHub Pages, sulla base della decisione di adeguatezza UE-USA (Data Privacy Framework). Se il sito
-cambia hosting, quella parte va rivista.
+Vercel, sulla base della decisione di adeguatezza UE-USA (Data Privacy Framework). Se il sito cambia
+di nuovo hosting, quella parte va rivista: è già successo passando da GitHub Pages a Vercel.
 
 ## Contenuti ancora da inserire
 
@@ -220,11 +222,17 @@ python3 -m http.server 8000
 
 ## Pubblicazione
 
-Il sito è pubblicato con GitHub Pages dal branch `main`, cartella root:
+Il sito è pubblicato su **Vercel**, collegato al branch `main` di questo repo:
 
-https://riccardosuardi.github.io/magashop/
+https://magashop.vercel.app/
 
-Ogni push su `main` aggiorna il sito online in un paio di minuti.
+Ogni push su `main` fa ripartire la pubblicazione da solo.
+
+Prima stava su GitHub Pages ed è stato spostato perché la coda di pubblicazione di Pages smise di
+smaltire: quattro deploy di fila rimasti in `deployment_queued` per dieci minuti e poi scaduti, con
+la build sempre riuscita. Se un giorno si passa a **magashop.it**, vanno aggiornati `canonical`,
+`og:url` e `og:image` nelle due pagine, i tre blocchi JSON-LD in fondo a `index.html`, `sitemap.xml`
+e `robots.txt` — cioè ogni punto in cui l'indirizzo compare per esteso.
 
 ## Note
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://riccardosuardi.github.io/magashop/sitemap.xml
+Sitemap: https://magashop.vercel.app/sitemap.xml
