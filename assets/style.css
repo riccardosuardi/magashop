@@ -427,10 +427,6 @@ footer{ background:var(--navy); color:var(--blue-soft); padding:44px 0 32px; bor
 .page ul{ margin:12px 0 0 20px; display:flex; flex-direction:column; gap:8px; }
 .page ul + p{ margin-top:14px; }
 .page a{ color:var(--navy); text-decoration:underline; text-underline-offset:3px; }
-.page .todo{
-  background:#FFF6E5; border:1px solid #E8CF9C; border-radius:14px;
-  padding:16px 18px; margin:16px 0; font-size:0.9rem; color:#6B5320;
-}
 
 /* ---------- ANIMAZIONE ALLO SCORRIMENTO ---------- */
 .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }

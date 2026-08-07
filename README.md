@@ -173,9 +173,22 @@ L'art. 2250 del codice civile impone alle società di capitali di indicare **anc
 ufficio del Registro Imprese e numero di iscrizione, REA, capitale sociale effettivamente versato,
 eventuale socio unico e stato di liquidazione. Vanno aggiunti partita IVA, codice fiscale e PEC.
 
-Il blocco è in fondo a `index.html` e `privacy.html`, con i campi fra parentesi quadre. **Vanno
-tenuti allineati fra le due pagine.** Nessuno di questi dati è stato inventato: finché non arrivano
-dal cliente restano segnaposto.
+Il blocco è in fondo a `index.html` e `privacy.html`, ed è **identico nelle due pagine**: se cambia
+un dato va cambiato in entrambe, più la sezione "Titolare del trattamento" dell'informativa.
+
+| | |
+|---|---|
+| Ragione sociale | MAGA SHOP S.R.L. |
+| Sede legale | Via Tevere 6, 22079 Villa Guardia (CO) |
+| Registro Imprese | Como-Lecco n. CO-24754 |
+| REA | 221687 (C.C.I.A.A. di Como) |
+| Capitale sociale | € 30.000,00 i.v. |
+| P. IVA e C.F. | 01852450137 |
+| PEC | maga.villaguardia@lamiapec.it |
+
+**Resta da chiarire una cosa**: l'art. 2250 impone di indicare se la società ha un **socio unico**.
+Il dato non è arrivato, quindi non compare. Se MAGA SHOP S.R.L. è a socio unico va aggiunta la
+dicitura, altrimenti l'elenco è già completo così.
 
 ## Privacy e cookie
 
@@ -197,19 +210,12 @@ di nuovo hosting, quella parte va rivista: è già successo passando da GitHub P
 
 ## Contenuti ancora da inserire
 
-Sono già predisposti nel codice, marcati con commenti HTML in maiuscolo: basta sostituire i
-segnaposto.
+Sono predisposti nel codice: basta lasciar cadere i file al posto giusto.
 
 | Cosa | Dove |
 |---|---|
 | Loghi dei marchi trattati | `assets/brands.json` (chiave `file`) + `assets/brands/` |
-| Recensioni da pubblicare | `assets/recensioni.json` |
-| Dati societari completi | footer di `index.html` e `privacy.html`, più `privacy.html` |
 | Logo attività storiche e logo Confcommercio | `assets/loghi/`, blocco commentato nel footer |
-| Conferma degli indirizzi social | footer e `sameAs` nel JSON-LD |
-
-Il riquadro giallo in cima a `privacy.html` va tolto quando i dati societari sono stati inseriti:
-finché è lì, segnala che la pagina non è definitiva.
 
 ## Sviluppo in locale
 
