@@ -215,7 +215,7 @@ Sono predisposti nel codice: basta lasciar cadere i file al posto giusto.
 | Cosa | Dove |
 |---|---|
 | Loghi dei marchi trattati | `assets/brands.json` (chiave `file`) + `assets/brands/` |
-| Logo attività storiche e logo Confcommercio | `assets/loghi/`, blocco commentato nel footer |
+| Logo Regione Lombardia "Attività storiche" e logo Confcommercio | `assets/loghi/`, blocco commentato nel footer di `index.html` |
 
 ## Sviluppo in locale
 

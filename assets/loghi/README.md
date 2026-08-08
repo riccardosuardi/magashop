@@ -1,36 +1,39 @@
 # Loghi istituzionali del footer
 
-Qui vanno i marchi che MagaShop può esporre: il riconoscimento come attività storica e
-l'affiliazione a Confcommercio. Sono richiamati dal blocco `.foot-loghi` in `index.html`, oggi
-commentato in attesa dei file.
+Due marchi, entrambi confermati dal cliente:
 
-## Attività storiche: quale riconoscimento?
+| Marchio | Nome file | Che cos'è |
+|---|---|---|
+| Attività storiche | `attivita-storiche.png` | Riconoscimento di **Regione Lombardia** — registro regionale delle attività storiche e di tradizione, art. 148 ter L.R. 6/2010. Lo stemma verde e oro, non quello di Unioncamere |
+| Confcommercio | `confcommercio.png` | Logo ufficiale, uso riservato agli associati |
 
-Esistono **due marchi diversi e non intercambiabili**. Prima di mettere un logo bisogna sapere
-quale dei due è stato ottenuto:
-
-- **Regione Lombardia** — "attività storiche e di tradizione", registro regionale previsto
-  dall'art. 148 ter della L.R. 6/2010. Il marchio viene consegnato dalla Regione insieme al
-  riconoscimento, in genere in cerimonia presso la Camera di commercio.
-- **Unioncamere** — "Impresa Storica d'Italia", riconoscimento nazionale.
-
-Il file ufficiale arriva con il riconoscimento: **non va ricostruito né ridisegnato**, e non va
-usato se il riconoscimento non c'è.
-
-## Confcommercio
-
-Logo ufficiale, il cui uso è riservato agli associati. Va chiesto alla sede territoriale di
-riferimento, che fornisce il file nella versione corretta.
-
-## Convenzioni
-
-- **Formato**: SVG quando disponibile, altrimenti PNG con trasparenza ad almeno 92px di altezza
-  reale (nel footer sono alti 46px).
-- **Nomi dei file**: `attivita-storiche.svg`, `confcommercio.svg`.
-- **Colori originali**: nessun filtro, nessuna monocromia. Se il logo è scuro e non si legge sul
-  fondo navy del footer, va chiesta la versione in negativo prevista dalle loro linee guida — non
-  schiarito a mano.
+Se i file sono SVG basta cambiare l'estensione qui e nel blocco `.foot-loghi` di `index.html`.
 
 ## Come attivarli
 
-In `index.html`, nel footer, togliere i commenti attorno al blocco `.foot-loghi`.
+1. Metti i due file in questa cartella, coi nomi esatti della tabella.
+2. In `index.html`, nel footer, togli il commento attorno al blocco `.foot-loghi`.
+
+Il blocco è già scritto, con gli `alt` corretti: serve solo scoprirlo.
+
+## Perché stanno su una targa bianca
+
+Nel CSS ogni logo è dentro uno `<span>` con fondo bianco e angoli arrotondati. Non è un vezzo: il
+footer è navy e lo stemma di Regione Lombardia è verde e oro, quindi ci si leggerebbe male. Un
+marchio istituzionale però **non si può ricolorare né adattare** — le sue linee guida non lo
+consentono. La targa chiara risolve il problema senza toccare il marchio.
+
+Se un domani arriva la versione ufficiale in negativo di uno dei due, quella può stare direttamente
+sul navy: basta togliere lo `<span>` attorno a quell'immagine.
+
+## Requisiti dei file
+
+- **Formato**: SVG se disponibile, altrimenti PNG **con trasparenza**.
+- **Altezza reale**: almeno 92px, perché nel footer sono alti 46px e sugli schermi retina servono il
+  doppio dei pixel.
+- **Niente ritocchi**: nessun ritaglio, nessuna ricolorazione, nessuna deformazione. Vanno usati
+  come li ha consegnati l'ente.
+
+Se non hai il file ufficiale: quello di Regione Lombardia viene consegnato con il riconoscimento, in
+genere in cerimonia presso la Camera di commercio; quello di Confcommercio lo fornisce la sede
+territoriale di riferimento.
